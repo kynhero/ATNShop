@@ -1,19 +1,20 @@
-# https://hub.docker.com/_/microsoft-dotnet
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
-WORKDIR /source
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+WORKDIR /app
 
-# copy csproj and restore as distinct layers
-COPY *.sln .
-COPY aspnetapp/*.csproj ./aspnetapp/
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
 RUN dotnet restore
 
-# copy everything else and build app
-COPY aspnetapp/. ./aspnetapp/
-WORKDIR /source/aspnetapp
-RUN dotnet publish -c release -o /app --no-restore
+# Copy everything else and build
+COPY . .
+RUN dotnet publish -c Release -o out
 
-# final stage/image
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
 WORKDIR /app
-COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
+COPY --from=build-env /app/out .
+
+# Run the app on container startup
+# Use your project name for the second parameter
+# e.g. MyProject.dll
+ENTRYPOINT [ "dotnet", "dotnetcore-heroku-atn.dll" ]
