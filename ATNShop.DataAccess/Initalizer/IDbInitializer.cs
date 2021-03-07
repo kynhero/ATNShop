@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ATNShop.DataAccess.Initalizer
+namespace ATNShop.DataAccess.Initializer
 {
-    public interface IDbInitalizer
+    public interface IDbInitializer
     {
         void Initialize();
     }

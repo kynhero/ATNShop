@@ -12,7 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ATNShop.DataAccess.Data;
-using ATNShop.DataAccess.Initalizer;
+using ATNShop.DataAccess.Initializer;
+using ATNShop.DataAccess.Initializer;
 using ATNShop.DataAccess.Repository.IRepository;
 using ATNShop.DataAccess.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -48,7 +49,7 @@ namespace ATNShop
             services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));
             services.AddSingleton<IBrainTreeGate, BrainTreeGate>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IDbInitalizer, DbInitalizer>();
+            services.AddScoped<IDbInitializer, DbInitializer>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.ConfigureApplicationCookie(options =>
@@ -77,7 +78,7 @@ namespace ATNShop
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitalizer dbInitalizer)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -98,7 +99,7 @@ namespace ATNShop
             app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
-            dbInitalizer.Initialize();
+            dbInitializer.Initialize();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

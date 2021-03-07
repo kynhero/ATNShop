@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/atnshopserver/databases/ATNShopDevs_db",
+      "type": "mssql.azure",
+      "connectionId": "ATNShopDevs_db",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}
