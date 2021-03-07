@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-ATNShop-5E51917C-DF90-4298-8B2B-619BD0A557E7</UserSecretsId>
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
   </PropertyGroup>
 
 
@@ -33,6 +33,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\products\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\registry.hub.docker.com_kynhero.pubxml.user" />
   </ItemGroup>
 
 </Project>
